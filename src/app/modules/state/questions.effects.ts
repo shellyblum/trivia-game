@@ -4,7 +4,7 @@ import {EMPTY, of} from 'rxjs';
 import {map, mergeMap, catchError, switchMap, filter, tap, takeUntil, takeWhile, withLatestFrom} from 'rxjs/operators';
 import { QuestionsService } from '../services/questions.service';
 import * as QuestionsActions from "./questions.actions";
-import {Question} from "../question-list/questions.model";
+import {Question} from "../models/questions.model";
 import {Store} from "@ngrx/store";
 import {questionsSelector} from "./questions.selectors";
 

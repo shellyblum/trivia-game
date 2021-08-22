@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {Question} from "../question-list/questions.model";
+import {Question} from "../models/questions.model";
 
 export const GetQuestionAction = createAction('[Question/API] Get_Question');
 

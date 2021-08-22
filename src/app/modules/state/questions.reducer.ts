@@ -1,8 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { Question } from '../question-list/questions.model';
+import { Question } from '../models/questions.model';
 import * as QuestionsActions from "./questions.actions";
-import {initialAppState, AppState} from "./app.state";
+import {initialAppState} from "./app.state";
 
 export const questionsReducer = createReducer(
   initialAppState,
@@ -21,7 +21,3 @@ export const questionsReducer = createReducer(
   //   return [...state, questionId];
   // })
 );
-
-export function reducer(state: AppState | undefined, action: Action) {
-  return questionsReducer(state, action);
-}
