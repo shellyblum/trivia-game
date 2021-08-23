@@ -17,19 +17,13 @@ export class QuestionsComponent implements OnInit {
   responsiveOptions;
   questions = ['w','e','t'];
   questions$ = this.store.pipe(
-    select(questionsSelector),
-    tap((value: any) => {
+    select(questionsSelector))
+    .subscribe((val: any) => {
       debugger;
-    })).subscribe((val: any) => {
-    debugger;
-  });
+    });
 
   constructor(private store: Store<any>,
               private questionsService: QuestionsService) {
-    // this.questions$.subscribe((val: any) => {
-    //   let valddd = val;
-    //   debugger;
-    // });
 
     this.responsiveOptions = [
       {
