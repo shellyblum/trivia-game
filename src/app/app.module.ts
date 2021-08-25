@@ -12,10 +12,16 @@ import {QuestionsService} from "./services/questions.service";
 
 import {CarouselModule} from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import { StoreModule } from '@ngrx/store';
-import * as questionsReducer from './state/questions.reducer';
+import {questionsReducer} from './state/questions.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {AppEffects} from "./state/questions.effects";
+import {questionFeatureKey} from "./state/app.state";
+import {QuestionsModule} from "./modules/questions.module";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,17 +30,19 @@ import {AppEffects} from "./state/questions.effects";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ questionsList: questionsReducer.reducer }),
-    EffectsModule.forFeature([AppEffects]),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(questionFeatureKey, questionsReducer),
+    EffectsModule.forRoot([AppEffects]),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ButtonModule,
     CarouselModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    ConfirmDialogModule,
+    QuestionsModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [QuestionsService],
+  providers: [QuestionsService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,0 +1,13 @@
+<p-carousel [value]="questions" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+            [responsiveOptions]="responsiveOptions">
+  <ng-template pTemplate="header">
+    <h5>Time left: {{timeLeft}}</h5>
+  </ng-template>
+  <ng-template let-question pTemplate="item">
+    <app-question [question]="question"></app-question>
+  </ng-template>
+</p-carousel>
+
+<p-confirmDialog header="You are about to start the game! Each question has 4 options and 20 seconds"
+                 icon="pi pi-exclamation-triangle">
+</p-confirmDialog>

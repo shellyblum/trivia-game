@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from '../../app-routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 import {QuestionsService} from "../services/questions.service";
 
@@ -16,11 +16,14 @@ import {questionsReducer} from '../state/questions.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import {AppEffects} from "../state/questions.effects";
 import {questionFeatureKey} from "../state/app.state";
-import { QuestionsComponent } from './questions.component';
+import { QuestionsComponent } from './components/questions/questions.component';
+import { QuestionComponent } from './components/question/question.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
-    QuestionsComponent
+    QuestionsComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,
@@ -32,10 +35,12 @@ import { QuestionsComponent } from './questions.component';
     AppRoutingModule,
     FormsModule,
     ButtonModule,
-    CarouselModule
+    CarouselModule,
+    ConfirmDialogModule
   ],
   providers: [QuestionsService],
   exports: [QuestionsComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class QuestionsModule { }
+export class QuestionsModule {
+}
