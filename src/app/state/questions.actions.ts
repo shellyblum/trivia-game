@@ -9,11 +9,16 @@ export const AddQuestionAction = createAction(
 );
 
 export const AddQuestionsAction = createAction(
-  '[Question List] Add Question',
-  props<{ questions: Array<any> }>()
+  '[Question List] Add Questions',
+  props<{ questions: Array<Question> }>()
 );
 
 export const updateStrikesAction = createAction(
   '[Strikes] Remove Strike',
   props<{ strikes: number}>()
+);
+
+export const updateScoreAction = createAction(
+  '[Score] Update Score',
+  props<{ score: number}>()
 );

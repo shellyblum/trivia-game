@@ -1,10 +1,11 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {questionsSelector} from "../../../state/questions.selectors";
-import {tap} from "rxjs/operators";
+import {questionsSelector, scoreSelector, strikesSelector} from "../../../state/questions.selectors";
+import {map, tap} from "rxjs/operators";
 import {QuestionsService} from "../../../services/questions.service";
 import * as QuestionActions from "../../../state/questions.actions";
 import {ConfirmationService} from "primeng/api";
+import {Question} from "../../../models/questions.model";
 
 @Component({
   selector: 'app-questions',
@@ -14,16 +15,25 @@ import {ConfirmationService} from "primeng/api";
 export class QuestionsComponent implements OnInit, OnChanges {
 
   display: boolean = false;
-  questionsAmount: number = 10;
   timeLeft: number = 20;
   interval;
   responsiveOptions;
-  questions:Array<any> = ['w','e','r','t','p','s','w','k','v','c'];
-  questions$ = this.store.pipe
-  (select(questionsSelector))
-    .subscribe((val: any) => {
+  pageIndex = 0;
+  questions$ = this.store.pipe(select(questionsSelector));
+  strikes: number;
+  strikes$ = this.store.pipe(
+    select(strikesSelector))
+    .subscribe((strikes: number) => {
       debugger;
-    });
+    this.strikes = strikes;
+  });
+  score: number;
+  score$ = this.store.pipe(
+    select(scoreSelector))
+    .subscribe((score: number) => {
+      debugger;
+      this.score = score;
+  });
 
   constructor(private store: Store<any>,
               private questionsService: QuestionsService,
@@ -52,12 +62,16 @@ export class QuestionsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.store.dispatch(QuestionActions.GetQuestionAction());
     this.confirm();
+    // this.strikes$.subscribe((strikes: number) => {
+    //   this.strikes = strikes;
+    // });
+    // this.score$.subscribe((score: number) => {
+    //   this.score = score;
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.result && changes.result.currentValue) {
-      debugger;
-    }
+    debugger;
   }
 
   startTimer() {
@@ -78,6 +92,25 @@ export class QuestionsComponent implements OnInit, OnChanges {
         this.startTimer();
       }
     });
+  }
+
+  afterScroll() {
+  }
+
+  gameOver() {
+    debugger;
+  }
+
+  nextPageEmitted() {
+    debugger;
+    if(this.pageIndex < 10) {
+      ++this.pageIndex;
+      clearInterval(this.interval);
+      this.timeLeft = 20;
+      this.startTimer();
+    } else {
+      this.gameOver()
+    }
   }
 
 }

@@ -1,8 +1,9 @@
 import {createSelector, createFeatureSelector, MemoizedSelector} from "@ngrx/store";
-import { questionFeatureKey, State } from "./app.state";
+import { questionFeatureKey, IAppState } from "./app.state";
 
-export const questionStateSelector: MemoizedSelector<any, State> = createFeatureSelector<State>(questionFeatureKey);
+export const questionStateSelector: MemoizedSelector<any, IAppState> = createFeatureSelector<IAppState>(questionFeatureKey);
 
-export const questionsSelector = createSelector(questionStateSelector, (state: State) => state.questions);
-export const questionsAmountSelector = createSelector(questionStateSelector, (state: State) => state.questionsAmount);
-export const strikesSelector = createSelector(questionStateSelector, (state: State) => state.strikes);
+export const questionsSelector = createSelector(questionStateSelector, (state: IAppState) => state.questions);
+export const questionsAmountSelector = createSelector(questionStateSelector, (state: IAppState) => state.questionsAmount);
+export const strikesSelector = createSelector(questionStateSelector, (state: IAppState) => state.strikes);
+export const scoreSelector = createSelector(questionStateSelector, (state: IAppState) => state.score);

@@ -1,10 +1,12 @@
-<p-carousel [value]="questions" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
-            [responsiveOptions]="responsiveOptions">
+<p-carousel [value]="questions$ | async" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+            (onPage)="afterScroll()" [responsiveOptions]="responsiveOptions" [page]="pageIndex">
   <ng-template pTemplate="header">
     <h5>Time left: {{timeLeft}}</h5>
+    <h5>Strikes left: {{strikes}}</h5>
   </ng-template>
   <ng-template let-question pTemplate="item">
-    <app-question [question]="question"></app-question>
+    <app-question [question]="question" [strikes]="strikes" [score]="score" [questionNum]=""
+                  (gameOver)="gameOver()" (nextPage)="nextPageEmitted()"></app-question>
   </ng-template>
 </p-carousel>
 

@@ -2,14 +2,16 @@ import { Question } from '../models/questions.model';
 
 export const questionFeatureKey = 'question';
 
-export interface State {
+export interface IAppState {
   questions: Array<any>,
+  questionsAmount: number,
   strikes: number,
-  questionsAmount: number
+  score: number
 }
 
-export const initialAppState: State = {
+export const initialAppState: IAppState = {
   questions: new Array<any>(),
+  questionsAmount: 10,
   strikes: 3,
-  questionsAmount: 10
+  score: 0
 };

@@ -17,5 +17,11 @@ export const questionsReducer = createReducer(
   on(QuestionsActions.updateStrikesAction, (state, {strikes}) => ({
     ...state,
     strikes: strikes
-  }))
+  })),
+
+  on(QuestionsActions.updateScoreAction, (state, {score}) => ({
+    ...state,
+    score: score
+  })),
+
 );
