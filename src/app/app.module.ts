@@ -17,7 +17,7 @@ import {ConfirmationService} from 'primeng/api';
 import { StoreModule } from '@ngrx/store';
 import {questionsReducer} from './state/questions.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import {AppEffects} from "./state/questions.effects";
+import {QuestionsEffects} from "./state/questions.effects";
 import {questionFeatureKey} from "./state/app.state";
 import {QuestionsModule} from "./modules/questions.module";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -33,7 +33,7 @@ import {DialogModule} from 'primeng/dialog';
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(questionFeatureKey, questionsReducer),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([QuestionsEffects]),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

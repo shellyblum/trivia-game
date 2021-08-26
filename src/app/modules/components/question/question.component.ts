@@ -15,7 +15,6 @@ export class QuestionComponent implements OnInit {
   @Output('nextPage') nextPage: EventEmitter<string> = new EventEmitter<string>();
 
   shuffledAnswers: any;
-  selectedAnswer: string;
 
   constructor(private store: Store<any>) { }
 
@@ -27,7 +26,6 @@ export class QuestionComponent implements OnInit {
   }
 
   setSelectedAnswer(answer: string) {
-    this.selectedAnswer = answer;
     if (answer === this.question.correct_answer) {
       this.store.dispatch(QuestionActions.addScoreAction());
     } else {

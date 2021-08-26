@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import * as QuestionsActions from "./questions.actions";
-import {initialAppState} from "./app.state";
+import {initialQuestionState} from "./app.state";
 
 export const questionsReducer = createReducer(
-  initialAppState,
+  initialQuestionState,
 
   on(QuestionsActions.GetQuestionAction, (state, {}) => ({...state})),
 

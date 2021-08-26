@@ -16,7 +16,7 @@ import {questionsAmountSelector, questionsSelector} from "./questions.selectors"
   providedIn: 'root'
 })
 
-export class AppEffects {
+export class QuestionsEffects {
 
   constructor(
     private actions$: Actions,

@@ -14,7 +14,7 @@ export class QuestionsComponent implements OnInit {
 
   display: boolean = false;
   timeLeft: number = 20;
-  dialogType: string = 'startGame';
+  gameOverDialog: boolean = false;
   interval;
   responsiveOptions;
   pageIndex = 0;
@@ -63,8 +63,6 @@ export class QuestionsComponent implements OnInit {
     this.confirm();
   }
 
-
-
   startTimer() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
@@ -88,18 +86,8 @@ export class QuestionsComponent implements OnInit {
   }
 
   gameOver() {
-    this.dialogType = 'GameOver';
+    this.gameOverDialog = true;
     clearInterval(this.interval);
-    this.timeLeft = 20;
-    this.pageIndex = 0;
-    this.confirmationService.confirm({
-      message: 'Your Score: ' + this.score,
-      rejectVisible: false,
-      accept: () => {
-        this.store.dispatch(QuestionActions.GetQuestionAction());
-        this.startTimer();
-      }
-    });
   }
 
   nextPageEmitted() {

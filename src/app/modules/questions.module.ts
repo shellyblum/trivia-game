@@ -14,7 +14,7 @@ import { ButtonModule } from 'primeng/button';
 import { StoreModule } from '@ngrx/store';
 import {questionsReducer} from '../state/questions.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import {AppEffects} from "../state/questions.effects";
+import {QuestionsEffects} from "../state/questions.effects";
 import {questionFeatureKey} from "../state/app.state";
 import { QuestionsComponent } from './components/questions/questions.component';
 import { QuestionComponent } from './components/question/question.component';
@@ -31,7 +31,7 @@ import {DialogModule} from "primeng/dialog";
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forFeature(questionFeatureKey, questionsReducer),
-    EffectsModule.forFeature([AppEffects]),
+    EffectsModule.forFeature([QuestionsEffects]),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

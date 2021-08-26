@@ -15,3 +15,7 @@ export const removeStrikeAction = createAction(
 export const addScoreAction = createAction(
   '[Score] Update Score'
 );
+
+export const resetGameAction = createAction(
+  '[Game] Start Over'
+)

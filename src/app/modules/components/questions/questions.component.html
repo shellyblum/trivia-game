@@ -1,5 +1,5 @@
 <p-carousel [value]="questions$ | async" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
-            [responsiveOptions]="responsiveOptions" [showNavigators]="false" [page]="pageIndex">
+            [responsiveOptions]="responsiveOptions" [page]="pageIndex">
   <ng-template pTemplate="header">
     <h3>Time left: {{timeLeft}}</h3>
     <h3>Strikes left: {{strikes}}</h3>
@@ -10,14 +10,10 @@
   </ng-template>
 </p-carousel>
 
-<!--<p-confirmDialog [header]="dialogType"-->
-<!--                 icon="pi pi-exclamation-triangle">-->
-<!--</p-confirmDialog>-->
-
-<p-confirmDialog *ngIf="dialogType === 'startGame'" header="Game Over!"
+<p-confirmDialog header="You are about to start the game! Each question has 4 options and 20 seconds"
                  icon="pi pi-exclamation-triangle">
 </p-confirmDialog>
 
-<p-confirmDialog *ngIf="dialogType === 'gameOver'" header="Game Over!"
-                 icon="pi pi-exclamation-triangle">
-</p-confirmDialog>
+<p-dialog header="Game Over!" [(visible)]="gameOverDialog">
+  Your Score: {{score}}
+</p-dialog>
