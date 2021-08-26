@@ -3,15 +3,11 @@
     <div class="p-mb-3">
     </div>
     <div class="question">
-      <h4 class="p-mb-1">{{question.question}}</h4>
-
+      <h2 class="p-mb-1">{{'(' + questionNum + ')'}} {{question.question}}</h2>
       <div class="answers">
-<!--        <div class="p-d-flex p-flex-wrap p-jc-center">-->
-<!--          <div class="p-mr-2 p-mb-2" *ngFor="let answer of shuffledAnswers" (click)="setSelectedAnswer(answer)">{{answer}}</div>-->
-<!--        </div>-->
-        <div *ngFor="let answer of shuffledAnswers" (click)="setSelectedAnswer(answer)">
+        <p *ngFor="let answer of shuffledAnswers" (click)="setSelectedAnswer(answer)">
           {{answer}}
-        </div>
+        </p>
       </div>
     </div>
   </div>

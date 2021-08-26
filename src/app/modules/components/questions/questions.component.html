@@ -1,11 +1,11 @@
 <p-carousel [value]="questions$ | async" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
             (onPage)="afterScroll()" [responsiveOptions]="responsiveOptions" [page]="pageIndex">
   <ng-template pTemplate="header">
-    <h5>Time left: {{timeLeft}}</h5>
-    <h5>Strikes left: {{strikes}}</h5>
+    <h3>Time left: {{timeLeft}}</h3>
+    <h3>Strikes left: {{strikes}}</h3>
   </ng-template>
   <ng-template let-question pTemplate="item">
-    <app-question [question]="question" [strikes]="strikes" [score]="score" [questionNum]=""
+    <app-question [question]="question" [questionNum]="pageIndex+1 "
                   (gameOver)="gameOver()" (nextPage)="nextPageEmitted()"></app-question>
   </ng-template>
 </p-carousel>
@@ -13,3 +13,8 @@
 <p-confirmDialog header="You are about to start the game! Each question has 4 options and 20 seconds"
                  icon="pi pi-exclamation-triangle">
 </p-confirmDialog>
+
+<p-dialog header="Title" [(visible)]="gameOverDialog">
+  Game Over!
+  Your Score: {{score}}
+</p-dialog>

@@ -19,6 +19,7 @@ import {questionFeatureKey} from "../state/app.state";
 import { QuestionsComponent } from './components/questions/questions.component';
 import { QuestionComponent } from './components/question/question.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     FormsModule,
     ButtonModule,
     CarouselModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DialogModule
   ],
   providers: [QuestionsService],
   exports: [QuestionsComponent],

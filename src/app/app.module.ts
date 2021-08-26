@@ -22,6 +22,7 @@ import {questionFeatureKey} from "./state/app.state";
 import {QuestionsModule} from "./modules/questions.module";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { environment } from '../environments/environment';
     ButtonModule,
     CarouselModule,
     ConfirmDialogModule,
+    DialogModule,
     QuestionsModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

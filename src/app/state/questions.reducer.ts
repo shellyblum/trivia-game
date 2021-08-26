@@ -1,5 +1,4 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { Question } from '../models/questions.model';
+import { createReducer, on } from '@ngrx/store';
 import * as QuestionsActions from "./questions.actions";
 import {initialAppState} from "./app.state";
 
@@ -14,14 +13,13 @@ export const questionsReducer = createReducer(
       questions : [...questions]
   })),
 
-  on(QuestionsActions.updateStrikesAction, (state, {strikes}) => ({
+  on(QuestionsActions.removeStrikeAction, (state, {}) => ({
     ...state,
-    strikes: strikes
+    strikes: state.strikes -1
   })),
 
-  on(QuestionsActions.updateScoreAction, (state, {score}) => ({
+  on(QuestionsActions.addScoreAction, (state, {}) => ({
     ...state,
-    score: score
+    score: state.score +1
   })),
-
 );

@@ -1,10 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Question} from "../../../models/questions.model";
 import * as QuestionActions from "../../../state/questions.actions";
-import {select, Store} from "@ngrx/store";
-import {questionsSelector, strikesSelector} from "../../../state/questions.selectors";
-import {tap} from "rxjs/operators";
-
+import {Store} from "@ngrx/store";
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -12,32 +9,17 @@ import {tap} from "rxjs/operators";
 })
 export class QuestionComponent implements OnInit {
   @Input() question: Question;
-  @Input() strikes: number;
-  @Input() score: number;
+  @Input() questionNum: number;
 
   @Output('gameOver') gameOver: EventEmitter<string> = new EventEmitter<string>();
   @Output('nextPage') nextPage: EventEmitter<string> = new EventEmitter<string>();
 
   shuffledAnswers: any;
   selectedAnswer: string;
-  // strikes: number;
-  // strikes$ = this.store.pipe(
-  //   select(strikesSelector)
-  // );
-  // score: number;
-  // score$ = this.store.pipe(
-  //   select(strikesSelector)
-  // );
 
   constructor(private store: Store<any>) { }
 
   ngOnInit(): void {
-    // this.strikes$.subscribe((strikes: number) => {
-    //   this.strikes = strikes;
-    // });
-    // this.score$.subscribe((score: number) => {
-    //   this.score = score;
-    // });
     if (this.question) {
       let united = this.question.incorrect_answers.concat(this.question.correct_answer);
       this.shuffledAnswers = this.shuffleAnswers(united);
@@ -47,17 +29,10 @@ export class QuestionComponent implements OnInit {
   setSelectedAnswer(answer: string) {
     this.selectedAnswer = answer;
     if (answer === this.question.correct_answer) {
-      let score = ++this.score;
-      QuestionActions.updateScoreAction({score: score});
+      this.store.dispatch(QuestionActions.addScoreAction());
     } else {
-      let strikes = --this.strikes;
-      QuestionActions.updateStrikesAction({strikes: strikes});
+      this.store.dispatch(QuestionActions.removeStrikeAction());
     }
-
-    if (this.strikes === 0 && this.selectedAnswer !== this.question.correct_answer) {
-      this.gameOver.emit();
-    }
-
     this.nextPage.emit();
   }
 

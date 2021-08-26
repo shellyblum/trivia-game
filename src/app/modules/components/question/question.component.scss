@@ -1,5 +1,24 @@
 .question-item {
-  max-width: 60vw;
   margin: 0 auto;
   text-align: center;
+}
+h2 {
+  color: #3282c0;
+  text-align: start;
+}
+
+.answers {
+  color: 	#808080;
+  font-size: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  p {
+    border: 1px solid;
+    background-color: #D3D3D3;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 45%;
+    padding: 20px;
+    margin: 10px;
+  }
 }

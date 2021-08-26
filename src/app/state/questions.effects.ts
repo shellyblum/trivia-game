@@ -1,17 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {combineLatest, EMPTY, forkJoin, Observable, of} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {
   map,
-  mergeMap,
-  catchError,
   switchMap,
-  filter,
-  tap,
-  takeUntil,
-  takeWhile,
-  withLatestFrom,
-  take
+  withLatestFrom
 } from 'rxjs/operators';
 import { QuestionsService } from '../services/questions.service';
 import * as QuestionsActions from "./questions.actions";

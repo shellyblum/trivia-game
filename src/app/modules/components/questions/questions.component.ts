@@ -1,21 +1,20 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {questionsSelector, scoreSelector, strikesSelector} from "../../../state/questions.selectors";
-import {map, tap} from "rxjs/operators";
 import {QuestionsService} from "../../../services/questions.service";
 import * as QuestionActions from "../../../state/questions.actions";
 import {ConfirmationService} from "primeng/api";
-import {Question} from "../../../models/questions.model";
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit, OnChanges {
+export class QuestionsComponent implements OnInit {
 
   display: boolean = false;
   timeLeft: number = 20;
+  gameOverDialog: boolean = false;
   interval;
   responsiveOptions;
   pageIndex = 0;
@@ -24,14 +23,15 @@ export class QuestionsComponent implements OnInit, OnChanges {
   strikes$ = this.store.pipe(
     select(strikesSelector))
     .subscribe((strikes: number) => {
-      debugger;
     this.strikes = strikes;
+    if (strikes === 0) {
+      this.gameOver();
+    }
   });
   score: number;
   score$ = this.store.pipe(
     select(scoreSelector))
     .subscribe((score: number) => {
-      debugger;
       this.score = score;
   });
 
@@ -56,22 +56,11 @@ export class QuestionsComponent implements OnInit, OnChanges {
         numScroll: 1
       }
     ];
-
   }
 
   ngOnInit() {
     this.store.dispatch(QuestionActions.GetQuestionAction());
     this.confirm();
-    // this.strikes$.subscribe((strikes: number) => {
-    //   this.strikes = strikes;
-    // });
-    // this.score$.subscribe((score: number) => {
-    //   this.score = score;
-    // });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    debugger;
   }
 
   startTimer() {
@@ -79,6 +68,8 @@ export class QuestionsComponent implements OnInit, OnChanges {
       if(this.timeLeft > 0) {
         this.timeLeft--;
       } else {
+        this.nextPageEmitted();
+        --this.strikes;
         this.timeLeft = 20;
       }
     },1000)
@@ -98,12 +89,11 @@ export class QuestionsComponent implements OnInit, OnChanges {
   }
 
   gameOver() {
-    debugger;
+    this.gameOverDialog = true;
   }
 
   nextPageEmitted() {
-    debugger;
-    if(this.pageIndex < 10) {
+    if(this.pageIndex < 10 && this.strikes > 0) {
       ++this.pageIndex;
       clearInterval(this.interval);
       this.timeLeft = 20;
