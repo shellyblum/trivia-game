@@ -14,7 +14,7 @@ export class QuestionsComponent implements OnInit {
 
   display: boolean = false;
   timeLeft: number = 20;
-  gameOverDialog: boolean = false;
+  dialogType: string = 'startGame';
   interval;
   responsiveOptions;
   pageIndex = 0;
@@ -63,13 +63,15 @@ export class QuestionsComponent implements OnInit {
     this.confirm();
   }
 
+
+
   startTimer() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         this.nextPageEmitted();
-        --this.strikes;
+        this.store.dispatch(QuestionActions.removeStrikeAction());
         this.timeLeft = 20;
       }
     },1000)
@@ -85,11 +87,19 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
-  afterScroll() {
-  }
-
   gameOver() {
-    this.gameOverDialog = true;
+    this.dialogType = 'GameOver';
+    clearInterval(this.interval);
+    this.timeLeft = 20;
+    this.pageIndex = 0;
+    this.confirmationService.confirm({
+      message: 'Your Score: ' + this.score,
+      rejectVisible: false,
+      accept: () => {
+        this.store.dispatch(QuestionActions.GetQuestionAction());
+        this.startTimer();
+      }
+    });
   }
 
   nextPageEmitted() {

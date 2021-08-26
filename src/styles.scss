@@ -7,3 +7,8 @@ p-carousel .custom-carousel.p-carousel.p-component.p-carousel-horizontal {
 .p-carousel-content {
   margin-top: 60px;
 }
+
+.p-carousel-indicator button {
+  cursor: default;
+  pointer-events: none;
+}
