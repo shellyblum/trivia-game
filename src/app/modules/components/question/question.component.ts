@@ -27,9 +27,9 @@ export class QuestionComponent implements OnInit {
 
   setSelectedAnswer(answer: string) {
     if (answer === this.question.correct_answer) {
-      this.store.dispatch(QuestionActions.addScoreAction());
+      this.store.dispatch(QuestionActions.AddScoreAction());
     } else {
-      this.store.dispatch(QuestionActions.removeStrikeAction());
+      this.store.dispatch(QuestionActions.RemoveStrikeAction());
     }
     this.nextPage.emit();
   }

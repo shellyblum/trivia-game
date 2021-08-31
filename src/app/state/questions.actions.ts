@@ -8,14 +8,14 @@ export const AddQuestionsAction = createAction(
   props<{ questions: Array<Question> }>()
 );
 
-export const removeStrikeAction = createAction(
+export const RemoveStrikeAction = createAction(
   '[Strikes] Remove Strike'
 );
 
-export const addScoreAction = createAction(
+export const AddScoreAction = createAction(
   '[Score] Update Score'
 );
 
-export const resetGameAction = createAction(
+export const ResetGameAction = createAction(
   '[Game] Start Over'
 )

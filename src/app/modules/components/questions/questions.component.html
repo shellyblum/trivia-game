@@ -1,12 +1,13 @@
 <p-carousel [value]="questions$ | async" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
-            [responsiveOptions]="responsiveOptions" [page]="pageIndex">
+            [responsiveOptions]="responsiveOptions" [page]="pageIndex" [ngClass]="{'disabled': isGameOver}">
   <ng-template pTemplate="header">
     <h3>Time left: {{timeLeft}}</h3>
     <h3>Strikes left: {{strikes}}</h3>
   </ng-template>
   <ng-template let-question pTemplate="item">
     <app-question [question]="question" [questionNum]="pageIndex+1 "
-                  (gameOver)="gameOver()" (nextPage)="nextPageEmitted()"></app-question>
+                  (gameOver)="gameOver()" (nextPage)="nextPageEmitted()">
+    </app-question>
   </ng-template>
 </p-carousel>
 
@@ -14,6 +15,7 @@
                  icon="pi pi-exclamation-triangle">
 </p-confirmDialog>
 
-<p-dialog header="Game Over!" [(visible)]="gameOverDialog">
+<p-dialog header="Game Over!" [(visible)]="isGameOver">
   Your Score: {{score}}
+  <div class="start-over-button" (click)="startGame()">Start Over</div>
 </p-dialog>

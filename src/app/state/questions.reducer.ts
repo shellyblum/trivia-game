@@ -5,6 +5,10 @@ import {initialQuestionState} from "./app.state";
 export const questionsReducer = createReducer(
   initialQuestionState,
 
+  on(QuestionsActions.ResetGameAction, (state, {}) => ({
+    ...initialQuestionState
+  })),
+
   on(QuestionsActions.GetQuestionAction, (state, {}) => ({...state})),
 
   on(QuestionsActions.AddQuestionsAction,
@@ -13,12 +17,12 @@ export const questionsReducer = createReducer(
       questions : [...questions]
   })),
 
-  on(QuestionsActions.removeStrikeAction, (state, {}) => ({
+  on(QuestionsActions.RemoveStrikeAction, (state, {}) => ({
     ...state,
     strikes: state.strikes -1
   })),
 
-  on(QuestionsActions.addScoreAction, (state, {}) => ({
+  on(QuestionsActions.AddScoreAction, (state, {}) => ({
     ...state,
     score: state.score +1
   })),

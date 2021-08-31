@@ -20,6 +20,7 @@ import { QuestionsComponent } from './components/questions/questions.component';
 import { QuestionComponent } from './components/question/question.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogModule} from "primeng/dialog";
+import {SelectButtonModule} from "primeng/selectbutton";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {DialogModule} from "primeng/dialog";
     ButtonModule,
     CarouselModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    SelectButtonModule
   ],
   providers: [QuestionsService],
   exports: [QuestionsComponent],

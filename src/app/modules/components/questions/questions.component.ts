@@ -14,7 +14,7 @@ export class QuestionsComponent implements OnInit {
 
   display: boolean = false;
   timeLeft: number = 20;
-  gameOverDialog: boolean = false;
+  isGameOver: boolean = false;
   interval;
   responsiveOptions;
   pageIndex = 0;
@@ -59,7 +59,15 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.startGame();
+  }
+
+  startGame() {
+    this.store.dispatch(QuestionActions.ResetGameAction());
     this.store.dispatch(QuestionActions.GetQuestionAction());
+    this.isGameOver = false;
+    this.pageIndex = 0;
+    this.timeLeft = 20
     this.confirm();
   }
 
@@ -69,7 +77,7 @@ export class QuestionsComponent implements OnInit {
         this.timeLeft--;
       } else {
         this.nextPageEmitted();
-        this.store.dispatch(QuestionActions.removeStrikeAction());
+        this.store.dispatch(QuestionActions.RemoveStrikeAction());
         this.timeLeft = 20;
       }
     },1000)
@@ -80,13 +88,18 @@ export class QuestionsComponent implements OnInit {
       message: 'Are you ready??',
       rejectVisible: false,
       accept: () => {
-        this.startTimer();
+        this.questions$.subscribe((res: any) => {
+          if (res && res.length > 0) {
+            clearInterval(this.interval);
+            this.startTimer();
+          }
+        })
       }
     });
   }
 
   gameOver() {
-    this.gameOverDialog = true;
+    this.isGameOver = true;
     clearInterval(this.interval);
   }
 

@@ -4,6 +4,10 @@ p-carousel .custom-carousel.p-carousel.p-component.p-carousel-horizontal {
   font-family: cursive;
 }
 
+p-carousel.disabled .custom-carousel.p-carousel.p-component.p-carousel-horizontal {
+  opacity: 0.3;
+}
+
 .p-carousel-content {
   margin-top: 60px;
 }
